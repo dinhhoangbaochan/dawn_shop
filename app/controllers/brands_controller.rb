@@ -21,6 +21,13 @@ class BrandsController < ApplicationController
     end
   end
 
+  def show
+    brand = Brand.find(params[:id])
+    render json: brand
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: 'Brand not found' }, status: :not_found
+  end
+
   def edit
     @brand = Brand.find(params[:id])
   end
